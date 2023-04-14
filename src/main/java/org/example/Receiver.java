@@ -1,24 +1,24 @@
 package org.example;
 
-public class Receiver extends Thread{
+public class Receiver implements Runnable {
     private Message message;
 
     public Receiver(Message message) {
         this.message = message;
     }
 
+    @Override
     public void run() {
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             synchronized (message) {
                 if (message.getMessage().isEmpty()) {
                     try {
                         message.wait();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Thread.currentThread().interrupt();
                     }
                 }
-
-                System.out.println("Receive Message : " + message.getMessage());
+                System.out.println("Received message: " + message.getMessage());
                 message.setMessage("");
             }
         }
