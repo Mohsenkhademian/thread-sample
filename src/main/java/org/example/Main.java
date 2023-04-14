@@ -11,7 +11,7 @@ public class Main {
         Sender sender = new Sender(message);
         Receiver receiver = new Receiver(message);
         int maxMessages = 5;
-        final boolean pauseFlag = false; // pauseFlag به صورت final تعریف شده است.
+        final boolean pauseFlag = false;
         Timer timer = new Timer();
 
         ExecutorService executorService = Executors.newFixedThreadPool(2);
@@ -19,7 +19,7 @@ public class Main {
         executorService.submit(receiver);
 
         timer.scheduleAtFixedRate(new TimerTask() {
-            final int maxMessages = 5; // maxMessages را به صورت final تعریف کنید.
+            final int maxMessages = 5;
             int count = 0;
 
             @Override
